@@ -187,7 +187,7 @@ Creating individual IAM users instead of using the AWS root account improves acc
 
 ## Step 3 — Enable MFA
 
-* Admin user was configured to perform MFA when logging in.
+* Admin user was configured to perform MFA using google authenticator when logging in. Admin user is required to key in his password (Something you know) and the 6 digit pin from google authenticator installed in his mobile device (Something you have) for authentication into AWS cloud.
 
 <img width="1263" height="200" alt="image" src="https://github.com/user-attachments/assets/8f5d7e68-6d2b-4a15-852a-db29ab742cd7" />
 
@@ -236,27 +236,95 @@ Three IAM roles were created to represent common organizational responsibilities
 
 ## Step 5 — Test Permissions
 
-...
+I will be using IAM as a platform to test the permissions of each user.
+
+* Admin user should be able to read and make changes to IAM such as adding a AdministratorAccess permission to developer user. Screenshot proves that indeed admin user is able to perform the above.
+
+<img width="949" height="397" alt="image" src="https://github.com/user-attachments/assets/578cdf8c-8076-4b21-8041-d6da8846d04c" />
+
+<img width="951" height="640" alt="image" src="https://github.com/user-attachments/assets/f1136644-8853-4549-87ca-abad621e4265" />
+
+* Developer user should not have access to view or manage IAM users, groups, roles, or policies unless their job responsibilities specifically require it.
+
+<img width="953" height="405" alt="image" src="https://github.com/user-attachments/assets/8a20f17f-845d-4a41-8d33-7b7f7499989f" />
+
+Finally, auditor user should be able to view IAM, but should not be able to manage the IAM system such as adding a AdministratorAccess permission to itself.
+
+<img width="960" height="399" alt="image" src="https://github.com/user-attachments/assets/22ba8b54-5bd3-42aa-8caa-c4cc88a04515" />
+
+<img width="945" height="497" alt="image" src="https://github.com/user-attachments/assets/137286bc-7f02-46a4-8228-9dfd7e053206" />
 
 ---
 
+### Permission Boundary Demonstration
+
+The organization uses a standard Developer IAM group that provides access to Amazon EC2, Amazon S3, and Amazon CloudWatch Logs.
+
+To demonstrate the use of permission boundaries, a second Developer user (Bob) was created and assigned to the same Developer group. However, Bob was also assigned a permission boundary that limits his effective permissions to Amazon EC2 only.
+
+This approach allows the organization to maintain a single Developer group while restricting individual users to the permissions required for their specific project responsibilities. It demonstrates how permission boundaries can enforce the Principle of Least Privilege without increasing IAM group complexity.
+
+<img width="938" height="456" alt="image" src="https://github.com/user-attachments/assets/7a7ef845-c556-41ad-9ade-92ab7082f793" />
+
+<img width="905" height="691" alt="image" src="https://github.com/user-attachments/assets/a305a774-a95d-44c0-83e0-85702a898361" />
+
+* John should only have access to EC2 but not S3.
+
+<img width="947" height="802" alt="image" src="https://github.com/user-attachments/assets/8e0bc594-7cb6-4a2e-8bd2-d7259beefc5d" />
+
+<img width="940" height="870" alt="image" src="https://github.com/user-attachments/assets/ba0a9f49-a7db-4ff1-b862-4bf6fe20954f" />
+
+<img width="944" height="864" alt="image" src="https://github.com/user-attachments/assets/ddb49de1-7ac2-4e86-ace4-c0e4449d579d" />
+
 # Security Decisions
 
-### Why Least Privilege?
+The following security decisions were made during the design and implementation of this IAM solution to align with AWS security best practices and fundamental cloud security principles.
 
-...
+---
 
-### Why RBAC?
+## Why Least Privilege?
 
-...
+The Principle of Least Privilege (PoLP) was implemented by granting each user only the permissions required to perform their assigned responsibilities.
 
-### Why MFA?
+- The **Administrator** was granted full administrative access to manage the AWS environment.
+- The **Developer** was granted access only to the AWS services required for application development, including Amazon EC2, Amazon S3, and Amazon CloudWatch Logs.
+- The **Auditor** was granted read-only access to review configurations, logs, and resources without the ability to modify them.
 
-...
+Restricting permissions reduces the attack surface, limits the impact of compromised credentials, and helps prevent accidental or unauthorized changes to cloud resources.
 
-### Why Permission Boundaries?
+---
 
-...
+## Why Role-Based Access Control (RBAC)?
+
+Role-Based Access Control (RBAC) simplifies permission management by assigning permissions to IAM groups based on job responsibilities rather than assigning permissions directly to individual users.
+
+Three IAM groups were created:
+
+- **Admin-Group**
+- **Developer-Group**
+- **Auditor-Group**
+
+Users inherit permissions through their group membership, making the permission model easier to manage, more consistent, and more scalable as the organization grows.
+
+---
+
+## Why Multi-Factor Authentication (MFA)?
+
+Multi-Factor Authentication (MFA) was enabled to provide an additional layer of security beyond passwords.
+
+Even if a user's password is compromised through phishing, credential reuse, or brute-force attacks, MFA requires a second form of verification before access is granted.
+
+MFA is especially important for privileged accounts such as administrators, as these accounts have elevated permissions that could significantly impact the AWS environment if compromised.
+
+---
+
+## Why Permission Boundaries?
+
+Permission boundaries were used to demonstrate how organizations can safely delegate permissions while preventing privilege escalation.
+
+The Developer IAM group provides access to Amazon EC2, Amazon S3, and Amazon CloudWatch Logs to support general development activities. However, a permission boundary was applied to a specific developer to restrict their effective permissions to only those required for their assigned project.
+
+This approach allows the organization to maintain a standard Developer IAM group while enforcing least privilege for individual users without creating multiple specialized IAM groups. It also prevents users from receiving permissions beyond the limits defined by the permission boundary, even if additional IAM policies are attached in the future.
 
 ---
 
