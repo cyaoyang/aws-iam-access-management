@@ -183,15 +183,54 @@ Creating individual IAM users instead of using the AWS root account improves acc
 
 <img width="1276" height="482" alt="image" src="https://github.com/user-attachments/assets/5db8bdc3-8e24-4425-b74d-43a832aa1f69" />
 
+---
+
 ## Step 3 — Enable MFA
 
-...
+* Admin user was configured to perform MFA when logging in.
+
+<img width="1263" height="200" alt="image" src="https://github.com/user-attachments/assets/8f5d7e68-6d2b-4a15-852a-db29ab742cd7" />
 
 ---
 
 ## Step 4 — Create IAM Roles
 
-...
+### Objective
+
+Create IAM roles to provide temporary, role-based access to AWS resources without relying on long-term credentials. IAM roles improve security by allowing permissions to be assumed only when required and are commonly used by AWS services, applications, and users requiring temporary elevated access.
+
+### Why?
+
+Unlike IAM users, IAM roles do not have permanent credentials. Instead, they are assumed temporarily, reducing the exposure of long-term access keys and supporting the Principle of Least Privilege.
+
+Three IAM roles were created to represent common organizational responsibilities:
+
+| IAM Role | Purpose |
+|----------|---------|
+| **InfrastructureAdminRole** | Provides administrative access for infrastructure management tasks. |
+| **ApplicationDeveloperRole** | Allows developers to deploy and manage application resources while restricting access to security-sensitive services. |
+| **SecurityAuditorRole** | Provides read-only access for security reviews, compliance audits, and monitoring activities. |
+
+### Implementation
+
+- Created the **InfrastructureAdminRole**.
+- Attached the **AdministratorAccess** policy.
+- Created the **ApplicationDeveloperRole**.
+- Attached permissions for Amazon EC2, Amazon S3, and Amazon CloudWatch Logs.
+- Created the **SecurityAuditorRole**.
+- Attached read-only policies for IAM, Amazon EC2, Amazon S3, AWS CloudTrail, and Amazon CloudWatch.
+
+### Screenshot
+
+<img width="1804" height="630" alt="image" src="https://github.com/user-attachments/assets/73bdf003-90c1-4745-bb5e-100da240a4a5" />
+
+
+### Security Considerations
+
+- IAM roles provide temporary credentials instead of permanent access keys.
+- Role-based permissions reduce the need to assign excessive permissions directly to individual users.
+- Separating administrative, development, and auditing roles supports the Principle of Least Privilege and Separation of Duties.
+- In production environments, IAM roles are preferred over long-term IAM user credentials whenever possible.
 
 ---
 
