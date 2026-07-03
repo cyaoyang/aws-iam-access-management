@@ -1,153 +1,201 @@
 # AWS IAM Access Management
 
-## Project Overview
+## Executive Summary
 
-This project demonstrates the implementation of secure Identity and Access Management (IAM) within Amazon Web Services (AWS). It covers the creation of IAM users, implementation of Multi-Factor Authentication (MFA), application of the Principle of Least Privilege, and the design of Role-Based Access Control (RBAC) using IAM roles and policies.
+This project demonstrates the implementation of secure Identity and Access Management (IAM) within AWS. It focuses on protecting cloud resources by applying the Principle of Least Privilege, implementing Role-Based Access Control (RBAC), enabling Multi-Factor Authentication (MFA), and validating user permissions.
 
-The project simulates how organizations manage user identities and permissions to protect cloud resources while ensuring users have only the access required for their responsibilities.
+The implementation reflects security practices commonly adopted in enterprise cloud environments.
 
 ---
 
-## Objectives
+# Business Scenario
 
-This project was completed to:
+A growing technology company has recently migrated its infrastructure to AWS.
+
+As the number of employees increases, managing access using the root account is no longer secure or scalable.
+
+The company requires an IAM solution that:
+
+- Separates administrative responsibilities
+- Restricts developer access
+- Provides auditors with read-only visibility
+- Protects privileged accounts using MFA
+- Follows the Principle of Least Privilege
+
+As the Cloud Security Engineer, your task is to design and implement this solution.
+
+---
+
+# Project Objectives
 
 - Create IAM users
-- Configure secure authentication using MFA
-- Apply the Principle of Least Privilege
-- Design Role-Based Access Control (RBAC)
-- Create and assign IAM roles
-- Define custom permission policies
-- Validate user permissions and access boundaries
+- Create IAM roles
+- Configure RBAC
+- Apply Least Privilege
+- Enable MFA
+- Validate permissions
 
 ---
 
-## AWS Services Used
+# AWS Services Used
 
-- AWS Identity and Access Management (IAM)
-
----
-
-## Security Concepts Demonstrated
-
-- Identity and Access Management
-- Authentication vs Authorization
-- Principle of Least Privilege
-- Multi-Factor Authentication (MFA)
-- Role-Based Access Control (RBAC)
-- IAM Roles
-- IAM Policies
-- Permission Boundaries
+| Service      | Purpose               |
+|--------------|-----------------------|
+| IAM          | Identity Management   |
+| MFA          | Secure Authentication |
+| IAM Policies | Authorization         |
+| IAM Roles    | RBAC                  |
 
 ---
 
-## Architecture
+# Architecture Diagram
 
-
-```
-                AWS Account
-                     │
-          ┌──────────┴──────────┐
-          │                     │
-     IAM Users             IAM Roles
-          │                     │
-          ├──────────┐          │
-          │          │          │
-      Admin      Developer   Auditor
-          │          │          │
-          └──────────┴──────────┘
-                     │
-             IAM Policies
-                     │
-             AWS Resources
-```
+*(AWS architecture diagram here)*
 
 ---
 
-## Implementation
+# Solution Design
 
-### Part 1 – IAM User Management
+## IAM Users
 
-- Created IAM users
-- Assigned least privilege permissions
-- Enabled Multi-Factor Authentication (MFA)
-- Tested user login
-
-### Part 2 – Role-Based Access Control (RBAC)
-
-- Created Admin role
-- Created Developer role
-- Created Auditor role
-- Defined IAM policies
-- Assigned users to appropriate roles
-- Validated permission boundaries
+| User    | Role         |
+|---------|--------------|
+| Alice   | Administrator|
+| Bob     | Developer    |
+| Charlie | Auditor      |
 
 ---
 
-## Security Best Practices
+## IAM Roles
 
-This project follows several AWS security best practices:
-
-- Avoid using the root account for daily administration
-- Enable MFA for privileged users
-- Apply the Principle of Least Privilege
-- Use IAM roles instead of long-term credentials where possible
-- Regularly review IAM permissions
-- Separate responsibilities through Role-Based Access Control
+| Role          | Permissions           |
+|---------------|-----------------------|
+| Administrator | Full Access           |
+| Developer     | Development Resources |
+| Auditor       | Read Only             |
 
 ---
 
-## Screenshots
+## Permission Model
 
-Include screenshots of:
-
-- IAM Dashboard
-- IAM User Creation
-- IAM Policies
-- IAM Roles
-- Admin Role
-- Developer Role
-- Auditor Role
-- MFA Configuration
-- Permission Boundary
-- Successful Login Test
+*(Explain why permissions were assigned this way.)*
 
 ---
 
-## Challenges Encountered
+# Implementation
 
-One challenge during this project was understanding how IAM policies interact with users and roles. Testing different permission levels highlighted the importance of assigning only the permissions required for each role while avoiding excessive privileges.
+## Step 1 — Create IAM Users
+
+### Why?
+
+Creating individual IAM users instead of using the AWS root account improves accountability by ensuring that every action can be traced back to a specific user (non-repudiation). It also strengthens security by reducing the use of the highly privileged root account for day-to-day administrative tasks. 
+
+### Screenshot
+
+<img width="761" height="216" alt="image" src="https://github.com/user-attachments/assets/1f6655b9-627f-4781-9ba8-ab21a034a581" />
+
+
+### Security Consideration
+
+Every individual should have their own identity in the AWS cloud.
+
+Every priveleged account should be secured with multi-factor authentication (MFA).
+
+Each account should be secured a strong password of at least 12 characters in length containing uppercase and lowercase characters and at least one special character.
+
+The AWS root account should not be used for day-to-day administrative tasks. Instead, administrators should use IAM users or IAM roles with only the permissions required to perform their job functions.
+
+Permissions should follow the Principle of Least Privilege, granting users only the access necessary to perform their responsibilities.
 
 ---
 
-## Lessons Learned
+## Step 2 — Configure Least Privilege
 
-This project reinforced that Identity and Access Management is one of the most critical security services within AWS. Properly configured IAM users, roles, policies, and MFA significantly reduce the risk of unauthorized access and help organizations implement secure access controls.
-
----
-
-## Real-World Application
-
-Organizations rely on IAM to securely manage employee access to cloud resources. Implementing Role-Based Access Control (RBAC) and enforcing least privilege ensures that administrators, developers, and auditors receive only the permissions necessary to perform their duties. This approach reduces the attack surface, supports compliance requirements, and strengthens overall cloud security.
+...
 
 ---
 
-## Skills Demonstrated
+## Step 3 — Enable MFA
+
+...
+
+---
+
+## Step 4 — Create IAM Roles
+
+...
+
+---
+
+## Step 5 — Test Permissions
+
+...
+
+---
+
+# Security Decisions
+
+### Why Least Privilege?
+
+...
+
+### Why RBAC?
+
+...
+
+### Why MFA?
+
+...
+
+### Why Permission Boundaries?
+
+...
+
+---
+
+# Challenges Encountered
+
+Example:
+
+Initially, understanding how IAM policies interact with IAM roles required additional testing. By validating permissions using different user accounts, I gained a clearer understanding of AWS authorization behaviour.
+
+---
+
+# Lessons Learned
+
+This project strengthened my understanding of AWS Identity and Access Management and highlighted how effective access control reduces security risks in cloud environments.
+
+---
+
+# Future Improvements
+
+Future enhancements include:
+
+- AWS IAM Identity Center
+- IAM Access Analyzer
+- ABAC
+- AWS Organizations SCPs
+- Automated IAM auditing
+
+---
+
+# Skills Demonstrated
 
 - AWS IAM
-- User Management
-- IAM Roles
+- RBAC
 - IAM Policies
-- Role-Based Access Control (RBAC)
+- MFA
 - Least Privilege
-- Multi-Factor Authentication (MFA)
-- Permission Boundaries
 - Cloud Security
+- Identity Management
 
-## Future enhancements for this project include:
+---
 
-- Integrate IAM Identity Center (AWS IAM Identity Center) for centralized workforce authentication.
-- Enforce MFA for all users through account policies.
-- Apply Attribute-Based Access Control (ABAC) using tags.
-- Monitor IAM activity with AWS CloudTrail and Amazon CloudWatch.
-- Regularly audit permissions using IAM Access Analyzer.
+# References
+
+AWS IAM Documentation
+
+AWS Security Best Practices
+
+NIST Access Control Principles
+
