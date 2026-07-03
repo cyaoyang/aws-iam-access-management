@@ -50,7 +50,8 @@ As the Cloud Security Engineer, your task is to design and implement this soluti
 
 # Architecture Diagram
 
-*(AWS architecture diagram here)*
+    <img width="759" height="687" alt="image" src="https://github.com/user-attachments/assets/2ad75ca1-8647-4844-8b1d-239cf788e5d3" />
+
 
 ---
 
@@ -78,7 +79,61 @@ As the Cloud Security Engineer, your task is to design and implement this soluti
 
 ## Permission Model
 
-*(Explain why permissions were assigned this way.)*
+The permission model for this project was designed following the **Principle of Least Privilege (PoLP)** and **Role-Based Access Control (RBAC)**.
+
+Three IAM users were created to represent common organizational roles:
+
+- **Administrator**
+- **Developer**
+- **Auditor**
+
+To simplify permission management and demonstrate RBAC, each user was assigned to a corresponding IAM group:
+
+- **Admin-Group**
+- **Developer-Group**
+- **Auditor-Group**
+
+Permissions were assigned to the IAM groups rather than directly to individual users. This approach simplifies administration, improves scalability, and ensures users with the same job responsibilities inherit a consistent set of permissions.
+
+Each role was granted only the permissions required to perform its responsibilities, reducing the attack surface and minimizing the risk of unauthorized access or accidental changes to AWS resources.
+
+### Administrator
+
+The **Administrator** user was granted the **AdministratorAccess** managed policy to simulate a cloud administrator responsible for managing the AWS environment. This role has unrestricted access to AWS resources, including Identity and Access Management (IAM), compute, storage, networking, and security services.
+
+Because this is a highly privileged role, it should always be protected with **Multi-Factor Authentication (MFA)** and should only be used when administrative tasks are required.
+
+### Developer
+
+The **Developer** user was granted permissions to:
+
+- Amazon EC2 – Full Access
+- Amazon S3 – Full Access
+- Amazon CloudWatch Logs – Read Only
+
+This permission set enables developers to deploy and manage application resources while preventing them from modifying IAM configurations or other security-critical settings. By limiting administrative privileges, the organization reduces the risk of accidental or malicious changes to the AWS environment.
+
+### Auditor
+
+The **Auditor** user was granted read-only permissions to:
+
+- IAM
+- Amazon EC2
+- Amazon S3
+- AWS CloudTrail
+- Amazon CloudWatch
+- AWS Config
+
+These permissions allow auditors to review security configurations, monitor resource usage, examine audit logs, and verify compliance without the ability to modify or delete AWS resources. Read-only access preserves the integrity of the environment while supporting governance and security auditing activities.
+
+### Security Principles Applied
+
+This permission model demonstrates several core cloud security principles:
+
+- **Principle of Least Privilege (PoLP):** Users receive only the permissions necessary to perform their assigned duties.
+- **Role-Based Access Control (RBAC):** Permissions are assigned based on job responsibilities rather than individual users.
+- **Separation of Duties (SoD):** Administrative, development, and auditing responsibilities are separated to reduce operational and security risks.
+- **Defense in Depth:** Administrative privileges are restricted to a single role, while monitoring and auditing capabilities are isolated to read-only accounts.
 
 ---
 
@@ -111,9 +166,7 @@ Permissions should follow the Principle of Least Privilege, granting users only 
 
 ## Step 2 — Configure Least Privilege
 
-...
 
----
 
 ## Step 3 — Enable MFA
 
