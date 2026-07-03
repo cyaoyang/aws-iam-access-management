@@ -165,19 +165,23 @@ Creating individual IAM users instead of using the AWS root account improves acc
 
 ## Step 2 — Configure Least Privilege
 
-Admin role was placed in admin-group with AdministratorAccess
+* Admin user was placed in admin-group with AdministratorAccess
 
 <img width="1363" height="394" alt="image" src="https://github.com/user-attachments/assets/c5367114-5d0d-45e3-a4ca-1fda04024166" />
 
 <img width="1278" height="427" alt="image" src="https://github.com/user-attachments/assets/9c4c5109-689d-4647-a5ce-8cdce507228f" />
 
+* Developer user was placed in developer-group with AmazonEC2FullAccess, AmazonS3FullAccess and CloudWatchLogsReadOnlyAccess
 
+<img width="1440" height="425" alt="image" src="https://github.com/user-attachments/assets/d6d83545-eb7e-4bc5-b890-3f46659ed959" />
 
+<img width="1284" height="473" alt="image" src="https://github.com/user-attachments/assets/748dc7be-0b47-4b3b-9703-700e31e215c1" />
 
+* Auditor user was placed in auditor-group with AmazonEC2ReadOnlyAccess, AmazonS3ReadOnlyAccess, AWSCloudTrail_ReadOnlyAccess, CloudWatchReadOnlyAccess and IAMReadOnlyAccess.
 
+<img width="1361" height="417" alt="image" src="https://github.com/user-attachments/assets/4482fc23-8d7f-4ded-90ab-6b994a7385b3" />
 
-
-
+<img width="1276" height="482" alt="image" src="https://github.com/user-attachments/assets/5db8bdc3-8e24-4425-b74d-43a832aa1f69" />
 
 ## Step 3 — Enable MFA
 
