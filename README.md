@@ -50,7 +50,8 @@ As the Cloud Security Engineer, your task is to design and implement this soluti
 
 # Architecture Diagram
 
-    <img width="759" height="687" alt="image" src="https://github.com/user-attachments/assets/2ad75ca1-8647-4844-8b1d-239cf788e5d3" />
+<img width="776" height="681" alt="image" src="https://github.com/user-attachments/assets/2a7ad598-0c57-474b-b20a-5a4afe89670e" />
+
 
 
 ---
