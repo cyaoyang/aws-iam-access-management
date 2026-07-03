@@ -143,3 +143,11 @@ Organizations rely on IAM to securely manage employee access to cloud resources.
 - Multi-Factor Authentication (MFA)
 - Permission Boundaries
 - Cloud Security
+
+## Future enhancements for this project include:
+
+- Integrate IAM Identity Center (AWS IAM Identity Center) for centralized workforce authentication.
+- Enforce MFA for all users through account policies.
+- Apply Attribute-Based Access Control (ABAC) using tags.
+- Monitor IAM activity with AWS CloudTrail and Amazon CloudWatch.
+- Regularly audit permissions using IAM Access Analyzer.
