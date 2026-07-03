@@ -1,4 +1,4 @@
-# AWS Identity and Access Management (IAM)
+# AWS IAM Access Management
 
 ## Project Overview
 
