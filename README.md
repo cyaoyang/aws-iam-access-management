@@ -133,8 +133,6 @@ This permission model demonstrates several core cloud security principles:
 
 - **Principle of Least Privilege (PoLP):** Users receive only the permissions necessary to perform their assigned duties.
 - **Role-Based Access Control (RBAC):** Permissions are assigned based on job responsibilities rather than individual users.
-- **Separation of Duties (SoD):** Administrative, development, and auditing responsibilities are separated to reduce operational and security risks.
-- **Defense in Depth:** Administrative privileges are restricted to a single role, while monitoring and auditing capabilities are isolated to read-only accounts.
 
 ---
 
@@ -153,19 +151,29 @@ Creating individual IAM users instead of using the AWS root account improves acc
 
 ### Security Consideration
 
-Every individual should have their own identity in the AWS cloud.
+* Every individual should have their own identity in the AWS cloud.
 
-Every priveleged account should be secured with multi-factor authentication (MFA).
+* Every priveleged account should be secured with multi-factor authentication (MFA).
 
-Each account should be secured a strong password of at least 12 characters in length containing uppercase and lowercase characters and at least one special character.
+* Each account should be secured a strong password of at least 12 characters in length containing uppercase and lowercase characters and at least one special character.
 
-The AWS root account should not be used for day-to-day administrative tasks. Instead, administrators should use IAM users or IAM roles with only the permissions required to perform their job functions.
+* The AWS root account should not be used for day-to-day administrative tasks. Instead, administrators should use IAM users or IAM roles with only the permissions required to perform their job functions.
 
-Permissions should follow the Principle of Least Privilege, granting users only the access necessary to perform their responsibilities.
+* Permissions should follow the Principle of Least Privilege, granting users only the access necessary to perform their responsibilities.
 
 ---
 
 ## Step 2 — Configure Least Privilege
+
+Admin role was placed in admin-group with AdministratorAccess
+
+<img width="1363" height="394" alt="image" src="https://github.com/user-attachments/assets/c5367114-5d0d-45e3-a4ca-1fda04024166" />
+
+<img width="1278" height="427" alt="image" src="https://github.com/user-attachments/assets/9c4c5109-689d-4647-a5ce-8cdce507228f" />
+
+
+
+
 
 
 
